@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let prediction = new renderPrediction(id);
         prediction.rendrer();
-        prediction.change();
     }
 
     document.addEventListener("click", toClose);  //close massage my click
@@ -31,8 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
             this.pop_up = document.getElementById("pop-up");
             this.pop_up_message = "";
             this.id = id;
-            this.color = 1;
-            this.time;
+            this.timer;
         }
 
         returnPrediction() { //create prediction
@@ -59,26 +57,28 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 this.delete_message()
             }, 10000);
+            this.toFade();
 
-            
+
         }
 
-        change(){  //fade color
-           let elem =  document.getElementById(`${this.id}`);
+        toFade() {  //fade color
 
-          this.time = setInterval(()=>{
-               elem.style.backgroundColor = `rgba(131, 255, 64, ${this.color})`;
-            this.color-=0.02;
-            console.log(this.color);
-           },200)
+            let color = 1;
+            this.timer = setInterval(() => {
+                document.getElementById(`${this.id}`)
+                    .style.backgroundColor = `rgba(131, 255, 64, ${color})`;
+                color -= 0.02;
+                console.log(color);
+            }, 200)
 
         }
 
 
         delete_message() { //delete message
             const close = document.getElementById(`${this.id}`);
-            close != undefined?close.remove(): false;
-            clearTimeout(this.time);
+            close != undefined ? close.remove() : false;
+            clearTimeout(this.timer);
         }
 
 
