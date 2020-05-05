@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
             this.pop_up.innerHTML += this.pop_up_message;
             setTimeout(() => {
                 this.delete_message()
-            }, 10000);
+            }, 5000);
             this.toFade();
 
 
@@ -65,14 +65,14 @@ document.addEventListener("DOMContentLoaded", () => {
         toFade() {  //fade color
             let color = 1;
             this.timer = setInterval(() => {
-                if(document.getElementById(`${this.id}`)){
+                if (document.getElementById(`${this.id}`)) {
                     document.getElementById(`${this.id}`)
                         .style.backgroundColor = `rgba(131, 255, 64, ${color})`;
                     color -= 0.02;
                 }
 
                 console.log(color);
-            }, 200)
+            }, 100)
 
         }
 
