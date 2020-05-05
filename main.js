@@ -63,12 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         toFade() {  //fade color
-
             let color = 1;
             this.timer = setInterval(() => {
-                document.getElementById(`${this.id}`)
-                    .style.backgroundColor = `rgba(131, 255, 64, ${color})`;
-                color -= 0.02;
+                if(document.getElementById(`${this.id}`)){
+                    document.getElementById(`${this.id}`)
+                        .style.backgroundColor = `rgba(131, 255, 64, ${color})`;
+                    color -= 0.02;
+                }
+
                 console.log(color);
             }, 200)
 
