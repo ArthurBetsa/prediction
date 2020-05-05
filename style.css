@@ -14,7 +14,10 @@ body {
     display: flex;
     justify-content: center;
 }
+.button {
+    align-self: center;
 
+}
 #pop-up {
 
     position: absolute;
@@ -33,26 +36,23 @@ body {
     z-index: 1;
     height: 50px;
     width: 500px;
-    background-color: aqua;
+    background-color: rgba(131, 255, 64, 0.93);
     justify-content: center;
     align-items: center;
-    animation: anim 4s 3;
+    animation: anim 5s;
 }
 
-@keyframes anim {
-    from {
-        background-color: rgba(0, 255, 255, 1);
-    }
-    to {
-        background-color: rgba(0, 255, 255, 0.89);
-    }
-}
+/*@keyframes anim {*/
+/*    from {*/
+/*        background-color: rgba(131, 255, 64, 0.93);*/
+/*    }*/
+/*    to {*/
+/*        background-color: rgba(0, 255, 255, 0.1);*/
+/*    }*/
+/*}*/
 
 
-.button {
-    align-self: center;
 
-}
 
 
 .pop_close {

@@ -5,14 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("prediction").addEventListener("click", createPrediction);
 
-    function createPrediction() {
+    function createPrediction() {  //create prediction by button
         const id = `f${(~~(Math.random() * 1e8)).toString(16)}`;
 
         let prediction = new renderPrediction(id);
         prediction.rendrer();
+        prediction.change();
     }
 
-    document.addEventListener("click", toClose);
+    document.addEventListener("click", toClose);  //close massage my click
 
     function toClose(event) {
         let close = event.target.className;
@@ -30,9 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
             this.pop_up = document.getElementById("pop-up");
             this.pop_up_message = "";
             this.id = id;
+            this.color = 1;
+            this.time;
         }
 
-        returnPrediction() {
+        returnPrediction() { //create prediction
             let answers = Math.ceil(Math.random() * 8);
             let message = "";
 
@@ -47,20 +50,35 @@ document.addEventListener("DOMContentLoaded", () => {
             return message;
         }
 
-        rendrer() {
+        rendrer() { //render new predoction message
             this.pop_up_message = `<div class="message" id="${this.id}">
                 <p>${this.returnPrediction()}</p>
-                <div class="pop_close"></div>
+                <div class="pop_close" ></div>
             </div>`;
             this.pop_up.innerHTML += this.pop_up_message;
             setTimeout(() => {
                 this.delete_message()
-            }, 5000);
+            }, 10000);
+
+            
         }
 
-        delete_message() {
+        change(){  //fade color
+           let elem =  document.getElementById(`${this.id}`);
+
+          this.time = setInterval(()=>{
+               elem.style.backgroundColor = `rgba(131, 255, 64, ${this.color})`;
+            this.color-=0.02;
+            console.log(this.color);
+           },200)
+
+        }
+
+
+        delete_message() { //delete message
             const close = document.getElementById(`${this.id}`);
             close != undefined?close.remove(): false;
+            clearTimeout(this.time);
         }
 
 
