@@ -2,6 +2,29 @@
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    function makeCounter() {
+        var currentCount = 0;
+
+        // возвращаемся к функции
+        function counter() {
+            return currentCount;
+        }
+
+
+        counter.minus = function () {
+            currentCount--;
+        };
+        counter.plus = function () {
+            currentCount++;
+        };
+
+
+
+        return counter;
+    };
+
+    let count = makeCounter();
+
 
     document.getElementById("prediction").addEventListener("click", createPrediction);
 
@@ -10,6 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let prediction = new renderPrediction(id);
         prediction.rendrer();
+
+        count.plus();
+        if(count() >= 5){
+            let test = document.getElementById("pop-up").firstChild.remove();
+            count.minus();
+        }
+
     }
 
     document.addEventListener("click", toClose);  //close massage my click
@@ -19,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let parent = event.target.offsetParent;
         if (close == "pop_close") {
             parent.remove();
-            createPrediction.some;
+            count.minus();
         }
     }
 
@@ -71,7 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     color -= 0.02;
                 }
 
-                console.log(color);
             }, 100)
 
         }
@@ -79,7 +108,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         delete_message() { //delete message
             const close = document.getElementById(`${this.id}`);
-            close != undefined ? close.remove() : false;
+            if (close != undefined) {
+                close.remove();
+                count.minus();
+            }
+
+
             clearTimeout(this.timer);
         }
 
