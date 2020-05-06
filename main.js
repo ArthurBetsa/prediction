@@ -69,7 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (this.currentElementId) {
                     this.currentElementId.style.backgroundColor = `rgba(131, 255, 64, ${this.opacity})`;
                     this.opacity -= 0.016;
-                    console.log(this.opacity);
                 }
             }, 100)
         }
