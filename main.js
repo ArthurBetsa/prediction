@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
 
+
+
+
     document.getElementById("prediction").addEventListener("click", createPrediction);
 
     function createPrediction() {  //create prediction by button
@@ -44,6 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
         constructor() {
             this.id = returnID();
             this.timer;
+            this.currentElementId;
+            this.opacity = 1;
         }
 
         rendrer() { //render new prediction message
@@ -61,18 +66,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         toFade() {  //to fade messages color
-            let color = 1;
             this.timer = setInterval(() => {
-                if (document.getElementById(`${this.id}`)) {
-                    document.getElementById(`${this.id}`)
-                        .style.backgroundColor = `rgba(131, 255, 64, ${color})`;
-                    color -= 0.02;
+                this.currentElementId = document.getElementById(`${this.id}`);
+                if (this.currentElementId) {
+                    this.currentElementId.style.backgroundColor = `rgba(131, 255, 64, ${this.opacity})`;
+                    this.opacity -= 0.02;
                 }
             }, 100)
         }
 
         delete_message(parent) { //delete message
-            const close = parent || document.getElementById(`${this.id}`);
+            const close = parent || this.currentElementId;
             if (close) {
                 close.remove();
                 currentCount.minus();
