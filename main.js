@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    document.addEventListener("click", event => { //close massage by click
+    document.addEventListener("click", event => { //close message by click
         if (event.target.className === "pop_close") {
                 event.target.offsetParent.remove();
                 currentCount.minus();
