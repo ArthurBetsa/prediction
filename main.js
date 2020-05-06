@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let prediction = {};
     const pop_up = document.getElementById("pop-up");
     const returnID = () => `f${(~~(Math.random() * 1e8)).toString(16)}`;
-    const answers = () => Math.ceil(Math.random() * 8 - 1);
+    const answers = () => Math.ceil(Math.random() * predictionMessage.length - 1);
     let predictionMessage = ["It is certain", "Outlook good",
         "You may rely on it", "Ask again later",
         "Concentrate and ask again", "Reply hazy, try again",
@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("prediction").addEventListener("click", createPrediction);
 
     function createPrediction() {  //create prediction by button
-
         prediction = new renderPrediction();
         prediction.rendrer();
         if (currentCount.value === 6) {
@@ -47,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
             this.timer;
         }
 
-
         rendrer() { //render new prediction message
             currentCount.plus();
             let pop_up_message = `<div class="message" id="${this.id}">
@@ -55,13 +53,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="pop_close" ></div>
             </div>`;
             pop_up.innerHTML += pop_up_message;
+
             setTimeout(() => {
                 this.delete_message()
             }, 5000);
             this.toFade();
         }
 
-        toFade() {  //fade color
+        toFade() {  //to fade messages color
             let color = 1;
             this.timer = setInterval(() => {
                 if (document.getElementById(`${this.id}`)) {
@@ -81,6 +80,15 @@ document.addEventListener("DOMContentLoaded", () => {
             clearTimeout(this.timer);
         }
     }
+
+    predictionMessage.push("sosi bibu");
+    predictionMessage.push("sosi bibu");
+    predictionMessage.push("sosi bibu");
+    predictionMessage.push("sosi bibu");
+    predictionMessage.push("sosi bibu");
+    predictionMessage.push("sosi bibu");
+    predictionMessage.push("sosi bibu");
+
 });
 
 
