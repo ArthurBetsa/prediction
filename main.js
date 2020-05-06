@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         prediction.rendrer();
 
         count.plus();
-        if(count() >= 5){
+        if(count() === 6){
             let test = document.getElementById("pop-up").firstChild.remove();
             count.minus();
         }
