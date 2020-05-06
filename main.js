@@ -21,15 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-
-
-
-
     document.getElementById("prediction").addEventListener("click", createPrediction);
 
     function createPrediction() {  //create prediction by button
         prediction = new renderPrediction();
         prediction.rendrer();
+        prediction.toFade();
         if (currentCount.value === 6) {
             pop_up.firstChild.remove();
             currentCount.minus();
@@ -37,16 +34,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.addEventListener("click", event => { //close massage by click
-        event.target.className == "pop_close"
-            ? prediction.delete_message(event.target.offsetParent)
-            : false
+        if (event.target.className === "pop_close") {
+                event.target.offsetParent.remove();
+                currentCount.minus();
+        }
     });
 
 
     class renderPrediction {
         constructor() {
             this.id = returnID();
-            this.timer;
+            this.timer = "";
             this.currentElementId;
             this.opacity = 1;
         }
@@ -59,10 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>`;
             pop_up.innerHTML += pop_up_message;
 
+
             setTimeout(() => {
                 this.delete_message()
             }, 5000);
-            this.toFade();
         }
 
         toFade() {  //to fade messages color
@@ -70,18 +68,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.currentElementId = document.getElementById(`${this.id}`);
                 if (this.currentElementId) {
                     this.currentElementId.style.backgroundColor = `rgba(131, 255, 64, ${this.opacity})`;
-                    this.opacity -= 0.02;
+                    this.opacity -= 0.016;
+                    console.log(this.opacity);
                 }
             }, 100)
         }
 
-        delete_message(parent) { //delete message
-            const close = parent || this.currentElementId;
+        delete_message() { //delete message
+            const close = this.currentElementId;
             if (close) {
                 close.remove();
                 currentCount.minus();
+                clearTimeout(this.timer);
+
             }
-            clearTimeout(this.timer);
         }
     }
 
